@@ -10,7 +10,17 @@ import recommendRoutes from "./routes/recommend.js";
 const app = express();
 
 /* ---------- MIDDLEWARE ---------- */
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // local frontend (dev)
+      "http://localhost:3000", // optional CRA dev
+      "https://YOUR-FRONTEND.vercel.app" // production frontend
+    ],
+    credentials: true
+  })
+);
+
 app.use(express.json());
 
 /* ---------- ROUTES ---------- */
@@ -21,12 +31,7 @@ app.use("/api/admin-auth", adminAuthRoutes);
 app.use("/api/inquiries", inquiriesPublic);
 app.use("/api/admin/inquiries", inquiriesAdmin);
 
-
-
-
-
-
-/* ---------- TEST ROUTE ---------- */
+/* ---------- HEALTH / TEST ROUTE ---------- */
 app.get("/", (req, res) => {
   res.send("API running");
 });

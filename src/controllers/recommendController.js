@@ -1,8 +1,6 @@
 import Neighborhood from "../models/Neighborhood.js";
-import SearchLog from "../models/SearchLog.js";
 import PaymentIntent from "../models/PaymentIntent.js";
-
-
+import SearchLog from "../models/SearchLog.js";
 
 const getConfidence = (score) => {
   if (score >= 85) return "High";
@@ -83,16 +81,17 @@ export const recommendNeighborhoods = async (req, res) => {
       resultsCount: sortedResults.length,
     });
 
-      res.json({
-        searchLogId: searchLog._id,
-        meta: {
-          input: { budget, bedrooms, priority },
-          totalResults: sortedResults.length,
-          freeLimit: FREE_LIMIT,
-        },
-        free: sortedResults.slice(0, FREE_LIMIT),
-        locked: sortedResults.slice(FREE_LIMIT),
-      });
+    res.json({
+  meta: {
+    searchLogId: searchLog._id,
+    input: { budget, bedrooms, priority },
+    totalResults: sortedResults.length,
+    freeLimit: FREE_LIMIT,
+  },
+  free: sortedResults.slice(0, FREE_LIMIT),
+  locked: sortedResults.slice(FREE_LIMIT),
+});
+
 
   } catch (err) {
     console.error(err);
