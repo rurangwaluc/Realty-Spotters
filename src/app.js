@@ -13,15 +13,20 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",          // local dev (Vite)
-      "http://localhost:3000",          // optional CRA
-      "https://realty-spotters-front.vercel.app" // Vercel frontend
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://realty-spotters-front.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "x-admin-token"
+    ],
     credentials: true
   })
 );
+
 
 app.use(express.json());
 
