@@ -15,7 +15,13 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://realty-spotters-front.vercel.app"
+
+      // Vercel preview / fallback
+      "https://realty-spotters-front.vercel.app",
+
+      // Custom domain (production)
+      "https://realtyspotters.com",
+      "https://www.realtyspotters.com"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
